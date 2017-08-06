@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from analy import Analy
 from scrapy.selector import Selector 
-from strTool import StrTool
-import re
+from splider58.spiders.tool.strTool import StrTool
 
 class Gather:
     __content=''
@@ -15,6 +13,7 @@ class Gather:
 
 
     def run(self):
+        # 需要优化
         response=Selector(text=self.__content)
 
         tmpResponse = [response]

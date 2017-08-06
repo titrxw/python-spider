@@ -169,4 +169,3 @@ pageNo=1
 https=Https(url="http://ty.58.com/ershoufang/?PGTID=0d100000-002e-4b5d-d2dc-a94ed11f9725&ClickID=1",data={})
 rule=Analy.getFormatRules(data)
 gather=Gather("",Analy.getFormatRules(data))
-runSpider(https,gather)

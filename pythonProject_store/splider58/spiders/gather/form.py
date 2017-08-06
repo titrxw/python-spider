@@ -18,8 +18,3 @@ class Form(UserInfo):
             "key":"49bac5d653633760ebb6c4c5bcdbe13a",
             "type":0
         }
-
-
-
-
-
