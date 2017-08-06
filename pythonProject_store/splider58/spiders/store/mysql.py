@@ -16,14 +16,14 @@ class Mysql:
             self.__cur.execute('SET CHARACTER SET utf8;')
             self.__cur.execute('SET character_set_connection=utf8;')
         except Exception,e:
-            print(e)
+            raise Exception(e.message)
 
     def execute(self,sqlStr,params=None):
         try:
             self.__cur.execute(sqlStr, params)
             self.__conn.commit()
         except Exception,e:
-            print Exception,":",e
+            raise Exception(e.message)
 
 
     def insert(self,sqlStr,params=None):
