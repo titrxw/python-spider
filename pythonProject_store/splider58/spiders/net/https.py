@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import urllib
 import urllib2
 import ssl
+import re
 import cookielib
 from splider58.spiders.tool.netTool import NetTool
 
@@ -11,14 +13,22 @@ class Https:
     __opener=None
     __cookies=None
     __code=200
+    __proxyIp = None
 
-    def __init__(self,url,data,installCookie=False):
+    def __init__(self,url,data,installCookie=True):
         if(installCookie):
             self.installCookie()
 
         self.__url=url
         self.__data=data
 
+    def setHttpProxyIp(self,ip):
+        if(ip is not None):
+            self.__proxyIp={'http': ip}
+
+    def setHttpsProxyIp(self,ip):
+        if(ip is not None):
+            self.__proxyIp={'https': ip}
 
     def setUrl(self,url):
         self.__url=url
@@ -66,7 +76,7 @@ class Https:
             rest=None
         )
     
-    # 该函数的参数中的cookies是来自makeCookie返回的
+
     def setCookies(self,cookies):
         self.__cookies.set_cookie(cookies)
 
@@ -97,7 +107,12 @@ class Https:
     def installCookie(self):
         if self.__opener is None:
             self.__cookies = cookielib.CookieJar()
-            self.__opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.__cookies))
+            proxy_support= None
+            if self.__proxyIp is not None:
+                proxy_support = urllib.request.ProxyHandler(self.__proxyIp)
+                self.__opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.__cookies),proxy_support)
+            else:
+                self.__opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.__cookies))
             urllib2.install_opener(self.__opener)
 
 
@@ -140,8 +155,7 @@ class Https:
                 self.__code=response.code
                 return response.read()
         except Exception,e:
-            print(e)
-            return None
+            raise Exception(e.message)
 
 
     def getCode(self):
