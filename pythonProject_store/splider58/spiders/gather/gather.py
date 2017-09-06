@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from analy import Analy
 from scrapy.selector import Selector 
-from splider58.spiders.tool.strTool import StrTool
+from strTool import StrTool
+import re
 
 class Gather:
     __content=''
@@ -13,7 +15,6 @@ class Gather:
 
 
     def run(self):
-        # 需要优化
         response=Selector(text=self.__content)
 
         tmpResponse = [response]
@@ -55,7 +56,12 @@ class Gather:
                 result['type']='detail'
                 result['value']={
                     'url':url,
-                    'rules':self.__rule['detail']
+                    'rules': {
+                        'elements': self.__rule['detail']['elements'],
+                        'detail': self.__rule['detail']['detail'],
+                        'parent': self.__rule['detail']['parent'],
+                        'page': self.__rule['detail']['page']
+                    }
                 }
             else:
                 result['type']='element'

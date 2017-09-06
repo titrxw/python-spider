@@ -36,7 +36,7 @@ class Mysql:
         colums=''
         seat=''
         for key,value in data.items():
-            colums=colums+"'"+key+"',"
+            colums=colums+" "+key+","
             seat=seat+"%("+key+")s,"
 
         colums=colums[:-1]
