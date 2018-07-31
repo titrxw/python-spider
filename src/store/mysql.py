@@ -15,14 +15,14 @@ class Mysql:
             self.__cur.execute('SET NAMES utf8;')
             self.__cur.execute('SET CHARACTER SET utf8;')
             self.__cur.execute('SET character_set_connection=utf8;')
-        except Exception,e:
+        except Exception as e:
             raise Exception(e.message)
 
     def execute(self,sqlStr,params=None):
         try:
             self.__cur.execute(sqlStr, params)
             self.__conn.commit()
-        except Exception,e:
+        except Exception as e:
             raise Exception(e.message)
 
 
@@ -36,7 +36,7 @@ class Mysql:
         colums=''
         seat=''
         for key,value in data.items():
-            colums=colums+"'"+key+"',"
+            colums=colums+" "+key+","
             seat=seat+"%("+key+")s,"
 
         colums=colums[:-1]

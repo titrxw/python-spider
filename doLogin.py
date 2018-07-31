@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from form import Form
-from https import Https
-from gather import Gather
-from mysql import Mysql
-from analy import Analy
+from src.net.https import Https 
+from src.gather.gather import Gather 
+from src.store.mysql import Mysql 
+from src.analy.analy import analy 
+
 import time
 data={
     'parent':[
@@ -99,10 +99,10 @@ def save(data={}):
         data[stime]=_time
         try:
             mysql.add("house_store",data)
-        except Exception,e:
+        except Exception as e:
             raise Exception(e.message)
     else:
-        print data
+        print(data)
 
 
 def getContent(netTool,method):
@@ -122,7 +122,7 @@ def tryAgain(netTool,method):
         content=getContent(netTool,method)
         if netTool.getCode() !=200:
             content=""
-            print "error"
+            print("error")
     return content
 
 
@@ -140,8 +140,8 @@ def runSpider(netTool,tgather,method="get",encode="utf-8"):
                         tgather.clearTmp()
                         try:
                             save(itemResult["value"])
-                        except Exception,e:
-                            print e
+                        except Exception as e:
+                            print(e)
 
                 if itemResult["type"]=="page":
                     netTool.setUrl(itemResult["value"])
@@ -155,14 +155,14 @@ def runSpider(netTool,tgather,method="get",encode="utf-8"):
                             netTool.setUrl(itemResult["value"]["url"])
                             gather=Gather("",itemResult["value"]['rules'])
                             runSpider(netTool,gather,method=method,encode=encode)
-                        except Exception,e:
-                            print e
+                        except Exception as e:
+                            print(e)
                     else:
-                        print itemResult
+                        print(itemResult)
                         # 表示类似详情页的链接获取失败但是之前的数据还存在，需要保存之前的数据
 
     else:
-        print netTool
+        print(netTool)
 
 global pageNo
 pageNo=1

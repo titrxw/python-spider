@@ -1,5 +1,5 @@
-from splider58.spiders.analy.element import Element
-from splider58.spiders.analy.rule import Rule
+from analy.element import Element 
+from analy.rule import Rule 
 
 class Analy:
 

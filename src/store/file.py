@@ -1,4 +1,4 @@
-import splider58.settings
+import settings
 import os
 
 class File:

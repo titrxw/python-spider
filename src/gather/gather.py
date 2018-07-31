@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from analy import Analy
+from analy.analy import Analy 
+from tool.strTool import strTool 
 from scrapy.selector import Selector 
-from strTool import StrTool
 import re
 
 class Gather:
@@ -34,7 +34,7 @@ class Gather:
                     tmpValue=None
                     try:
                         tmpValue = item.xpath(itemrule).extract()
-                    except Exception,e:
+                    except Exception as e:
                         print(e)            
                         # 写日志  这里不抛出异常的原因是为了保证数据的完整  不会因为其中一项数据的缺失导致整条数据的丢失
                         
@@ -47,7 +47,7 @@ class Gather:
                 url=''
                 try:
                     url = item.xpath(self.__rule['detail']['url']).extract()
-                except Exception,e:
+                except Exception as e:
                     print(e)
                     
                 if len(url) >0 and url is not None:
@@ -73,7 +73,7 @@ class Gather:
             tmpValue=None
             try:
                 tmpValue = response.xpath(self.__rule["page"]).extract()
-            except Exception,e:
+            except Exception as e:
                 print(e)
             if len(tmpValue) >0:
                 tmpValue =  tmpValue[0]

@@ -4,7 +4,7 @@ import urllib2
 import ssl
 import re
 import cookielib
-from splider58.spiders.tool.netTool import NetTool
+from tool.netTool import NetTool 
 
 class Https:
     __url=''
@@ -154,7 +154,7 @@ class Https:
                 response=urllib2.urlopen(req,context=context)
                 self.__code=response.code
                 return response.read()
-        except Exception,e:
+        except Exception as e:
             raise Exception(e.message)
 
 

@@ -1,5 +1,5 @@
-from splider58.spiders.store.mysql import Mysql
-from splider58.spiders.store.file import File
+from store.mysql import Mysql 
+from store.file import File 
 class Store:
     class_instance=None
 
