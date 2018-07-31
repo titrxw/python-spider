@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import urllib
-import urllib2
+import urllib.request
 import ssl
 import re
-import cookielib
-from tool.netTool import NetTool 
+import http.cookiejar
+from src.tool.netTool import NetTool 
 
 class Https:
     __url=''
@@ -57,7 +57,7 @@ class Https:
 
     
     def makeCookie(self,name,value):
-        return cookielib.Cookie(
+        return http.cookiejar.Cookie(
             version=0,
             name=name,
             value=value,
@@ -106,7 +106,7 @@ class Https:
 
     def installCookie(self):
         if self.__opener is None:
-            self.__cookies = cookielib.CookieJar()
+            self.__cookies = http.cookiejar.CookieJar()
             proxy_support= None
             if self.__proxyIp is not None:
                 proxy_support = urllib.request.ProxyHandler(self.__proxyIp)

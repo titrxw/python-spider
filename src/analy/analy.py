@@ -1,5 +1,5 @@
-from analy.element import Element 
-from analy.rule import Rule 
+from src.analy.element import Element 
+from src.analy.rule import Rule 
 
 class Analy:
 

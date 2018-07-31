@@ -1,5 +1,5 @@
-from store.mysql import Mysql 
-from store.file import File 
+from src.store.mysql import Mysql 
+from src.store.file import File 
 class Store:
     class_instance=None
 

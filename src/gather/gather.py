@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from analy.analy import Analy 
-from tool.strTool import strTool 
-from scrapy.selector import Selector 
-import re
+from src.analy.analy import Analy 
+from src.tool.strTool import StrTool 
+from scrapy.selector import Selector
 
 class Gather:
     __content=''
